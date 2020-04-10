@@ -5,8 +5,10 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.google.android.filament.gltfio.ResourceLoader;
+import com.google.ar.sceneform.SkeletonRig;
 import com.google.ar.sceneform.utilities.Preconditions;
 import com.google.ar.sceneform.utilities.SceneformBufferUtils;
+import com.google.ar.schemas.lull.SkeletonDef;
 import java.io.InputStream;
 import java.net.URI;
 import java.nio.ByteBuffer;
@@ -63,6 +65,7 @@ public class LoadRenderableFromFilamentGltfTask<T extends Renderable> {
                       && gltfByteBuffer[2] == 0x54
                       && gltfByteBuffer[3] == 0x46;
               this.renderableData.gltfByteBuffer = ByteBuffer.wrap(gltfByteBuffer);
+
               return renderable;
             },
             ThreadPools.getMainExecutor());

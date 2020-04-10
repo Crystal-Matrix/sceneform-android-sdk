@@ -41,7 +41,20 @@ android {
 
 dependencies {
     // Use the Sceneform UX Package built from the source files included in the sceneformux folder.
-    api project(":sceneformux")
+    implementation project(":sceneformux")
 
     implementation "com.android.support:appcompat-v7:28.0.0"
 }
+
+apply plugin: 'com.google.ar.sceneform.plugin'
+
+sceneform.asset('sampledata/models/andy_dance.fbx',
+        'default',
+        'sampledata/models/andy_dance.sfa',
+        'src/main/res/raw/andy_dance',
+        ['sampledata/models/andy_wave_r.fbx', 'sampledata/models/andy_wave_l.fbx'])
+
+sceneform.asset('sampledata/models/baseball-cap.gltf',
+        'default',
+        'sampledata/models/baseball-cap.sfa',
+        'src/main/res/raw/baseball_cap')

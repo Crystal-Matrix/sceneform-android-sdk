@@ -1585,4 +1585,9 @@ public class Node extends NodeParent implements TransformProvider {
 
     return Preconditions.checkNotNull(scene.getView().getRenderer());
   }
+
+  @Nullable
+  public SkeletonRig getSkeletonRig() {
+    return this.renderableInstance != null ? this.renderableInstance.getSkeletonRig() : null;
+  }
 }

@@ -16,6 +16,7 @@ import com.google.android.filament.gltfio.FilamentAsset;
 import com.google.android.filament.gltfio.ResourceLoader;
 
 
+import com.google.ar.sceneform.SkeletonRig;
 import com.google.ar.sceneform.collision.Box;
 import com.google.ar.sceneform.common.TransformProvider;
 import com.google.ar.sceneform.math.Matrix;
@@ -463,5 +464,10 @@ public class RenderableInstance {
         renderableManager.destroy(entity);
       }
     }
+  }
+
+  @Nullable
+  public SkeletonRig getSkeletonRig() {
+    return this.renderable instanceof ModelRenderable ? ((ModelRenderable)this.renderable).getSkeletonRig() : null;
   }
 }

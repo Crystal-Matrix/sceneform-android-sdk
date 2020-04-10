@@ -2,8 +2,10 @@ package com.google.ar.sceneform.rendering;
 
 import android.os.Build;
 
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 
+import com.google.ar.sceneform.SkeletonRig;
 import com.google.ar.sceneform.resources.ResourceRegistry;
 import com.google.ar.sceneform.utilities.AndroidPreconditions;
 
@@ -19,8 +21,9 @@ import com.google.ar.sceneform.utilities.AndroidPreconditions;
  */
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class ModelRenderable extends Renderable {
-  
 
+  @Nullable
+  private SkeletonRig skeletonRig;
 
 
   
@@ -81,7 +84,11 @@ public class ModelRenderable extends Renderable {
 
 
   
-  private void copyAnimationFrom(ModelRenderable other) {return ;}
+  private void copyAnimationFrom(ModelRenderable other) {
+    if (other.skeletonRig != null) {
+      this.skeletonRig = other.skeletonRig.makeCopy();
+    }
+  }
 
 
 
@@ -202,5 +209,26 @@ public class ModelRenderable extends Renderable {
     protected Builder getSelf() {
       return this;
     }
+  }
+
+  @Nullable
+  SkeletonRig getSkeletonRig() {
+    return this.skeletonRig;
+  }
+
+  void setSkeletonRig(@Nullable SkeletonRig skeleton) {
+    this.skeletonRig = skeleton;
+  }
+
+  public String getBoneName(int boneIndex) {
+    return this.skeletonRig != null ? this.skeletonRig.getBoneName(boneIndex) : "";
+  }
+
+  public int getBoneParentIndex(int boneIndex) {
+    return this.skeletonRig != null ? this.skeletonRig.getBoneParentIndex(boneIndex) : -1;
+  }
+
+  public int getBoneCount() {
+    return this.skeletonRig != null ? this.skeletonRig.getBoneCount() : 0;
   }
 }
